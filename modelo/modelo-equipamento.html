@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TAG}} - Data Book Digital</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <div>
+      <h1>{{TAG}}</h1>
+      <p>Data Book Digital do Equipamento</p>
+    </div>
+    <img src="../../assets/img/logo-gold.png" alt="Gold Redutores" class="logo">
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Foto do equipamento</h2>
+      <img src="../../assets/img/equipamento-{{TAG_SEM_ESPACO}}.jpg" alt="Foto do equipamento {{TAG}}" class="foto-equipamento">
+    </section>
+
+    <section class="card">
+      <h2>Dados principais</h2>
+      <table class="tabela-dados">
+        <tr><th>TAG</th><td>{{TAG}}</td></tr>
+        <tr><th>Fabricante</th><td>{{FABRICANTE}}</td></tr>
+        <tr><th>Tipo do equipamento</th><td>Motoredutor</td></tr>
+        <tr><th>Modelo</th><td>{{MODELO}}</td></tr>
+        <tr><th>Potência</th><td>Preencher potência</td></tr>
+        <tr><th>Relação de redução</th><td>Preencher relação</td></tr>
+        <tr><th>RPM entrada/saída</th><td>Preencher RPM</td></tr>
+        <tr><th>Tipo de montagem</th><td>Preencher montagem</td></tr>
+        <tr><th>Lubrificante</th><td>Preencher lubrificante</td></tr>
+        <tr><th>Quantidade de óleo</th><td>Preencher quantidade</td></tr>
+      </table>
+
+      <div class="botoes">
+        <a href="../../index.html" class="botao secundario">Voltar</a>
+        <a href="#" class="botao">Lista de Peças</a>
+        <a href="#" class="botao">Fotos</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Gold Redutores - Data Book Digital</p>
+  </footer>
+</body>
+</html>
