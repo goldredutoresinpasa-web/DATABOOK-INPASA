@@ -1,30 +1,49 @@
-# Data Book Digital - Gold Redutores
 
-Estrutura profissional para publicar páginas HTML no GitHub Pages.
+# Data Book Digital - Excel + GitHub Pages
+
+Este pacote gera páginas HTML individuais para equipamentos a partir de uma planilha Excel.
 
 ## Como usar
 
-1. Crie um repositório no GitHub.
-2. Envie todos estes arquivos para o repositório.
-3. Vá em Settings > Pages.
-4. Em Branch, selecione `main` e pasta `/root`.
-5. Salve.
-6. O GitHub gerará um link parecido com:
+1. Preencha `dados_equipamentos.xlsx`.
+2. Coloque fotos em `assets/img/`.
+3. Coloque PDFs em `assets/pdf/`.
+4. Abra `gerar_site.py`.
+5. Troque a linha `BASE_URL` pelo link real do GitHub Pages.
+6. Rode:
 
-https://seuusuario.github.io/nome-do-repositorio/
+```bash
+pip install pandas openpyxl qrcode pillow
+python gerar_site.py
+```
 
-## Estrutura
+## Estrutura esperada
 
-- `index.html`: página inicial com a lista de equipamentos.
-- `assets/css/style.css`: aparência visual do site.
-- `assets/img`: logos e fotos dos equipamentos.
-- `equipamentos/ME631010/index.html`: página individual do equipamento.
-- `modelo/modelo-equipamento.html`: modelo para copiar e criar novas TAGs.
+```text
+DATABOOK_INPASA_EXCEL_GITHUB/
+├── dados_equipamentos.xlsx
+├── gerar_site.py
+├── index.html
+├── assets/
+│   ├── css/style.css
+│   ├── img/
+│   ├── pdf/
+│   └── qrcodes/
+└── equipamentos/
+    └── ME-631011/
+        └── index.html
+```
 
-## Como criar nova TAG
+## QR Code
 
-1. Copie a pasta `equipamentos/ME631010`.
-2. Renomeie para a nova TAG, exemplo: `ME631011`.
-3. Edite o arquivo `index.html` dentro da pasta.
-4. Coloque a foto na pasta `assets/img`.
-5. Adicione o novo link no `index.html` principal.
+Cada QR Code aponta para:
+
+```text
+https://SEU_USUARIO.github.io/NOME_REPOSITORIO/equipamentos/TAG/
+```
+
+Exemplo:
+
+```text
+https://gold-redutores.github.io/DATABOOK-INPASA/equipamentos/ME-631011/
+```
