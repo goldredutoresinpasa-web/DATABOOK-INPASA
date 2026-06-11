@@ -9,7 +9,7 @@ body {
 }
 
 .topo {
-  background: linear-gradient(135deg, hwb(219 64% 29%), #2d2d2d);
+  background: linear-gradient(135deg, hwb(220 11% 5%), #2d2d2d);
   color: #fff;
   padding: 22px;
   border-bottom: 6px solid #d4af37;
@@ -41,7 +41,7 @@ body {
 }
 
 .card {
-  background: hsl(222, 69%, 87%);
+  background: hwb(223 79% 13%);
   border-radius: 14px;
   padding: 20px;
   margin-bottom: 18px;
