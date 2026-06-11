@@ -3,105 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <title>Data Book Digital - Equipamentos</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  
   <style>
-    /* --- CONFIGURAÇÕES DO EFEITO GLOW --- */
-    @property --hue { syntax: "<number>"; inherits: true; initial-value: 0; }
-    @property --rotate { syntax: "<number>"; inherits: true; initial-value: 0; }
-    @property --bg-x { syntax: "<number>"; inherits: true; initial-value: 0; }
-    @property --bg-y { syntax: "<number>"; inherits: true; initial-value: 0; }
-    @property --glow-scale { syntax: "<number>"; inherits: true; initial-value: 2; }
-    @property --glow-blur { syntax: "<number>"; inherits: true; initial-value: 6; }
-    @property --glow-opacity { syntax: "<number>"; inherits: true; initial-value: 1; }
-    @property --glow-radius { syntax: "<number>"; inherits: true; initial-value: 2; }
-    @property --white-shadow { syntax: "<number>"; inherits: true; initial-value: 0; }
-
-    :root {
-      --card-color: hsl(260deg 100% 3%);
-      --text-color: hsl(260deg 10% 55%);
-      --card-radius: 20px;
-      --animation-speed: 4s;
-    }
-
-    /* --- ESTILO DO CONTAINER DE BUSCA --- */
+    /* --- EFEITO GLOW (APENAS PARA A BUSCA) --- */
     .card-glow {
       width: 100%;
       max-width: 600px;
       margin: 30px auto;
-      aspect-ratio: 4/1;
+      height: 140px; /* Altura fixa para o card de busca */
       position: relative;
-      border-radius: var(--card-radius);
-      cursor: pointer;
+      border-radius: 20px;
     }
 
-    .card-glow > div {
+    .card-glow-content {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: var(--card-color);
-      border-radius: var(--card-radius);
+      background: #001f3f; /* Cor de fundo do seu card */
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      z-index: 1;
-    }
-
-    .card-glow .glow {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #ff00cc, #3333ff);
-      filter: blur(20px);
-      border-radius: var(--card-radius);
-      animation: hue-animation var(--animation-speed) linear infinite;
-    }
-
-    /* Ajuste do input dentro do card */
-    #busca {
-      width: 90%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      background: #111;
-      color: white;
-      margin-top: 10px;
+      padding: 15px;
       z-index: 2;
     }
 
-    /* --- ESTILOS GERAIS --- */
-    body { 
-        font-family: Arial, sans-serif; 
-        margin: 20px; 
-        background-image: url('fundoinpasa1.jpg');
-        background-size: cover;
-        background-attachment: fixed;
+    .glow {
+      position: absolute;
+      inset: -3px; /* Espessura da borda */
+      background: linear-gradient(45deg, #007bff, #00d4ff);
+      border-radius: 23px;
+      filter: blur(8px);
+      z-index: 1;
     }
 
-    .equipamento-card { display: block; padding: 10px; margin: 5px; background: white; border-radius: 8px; text-decoration: none; color: #003366; }
+    #busca {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
 
-    @keyframes hue-animation { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+    /* --- MANTENDO O LAYOUT DOS CARDS ORIGINAIS --- */
+    /* Garante que a grid não seja afetada pelo estilo da busca */
+    #listaEquipamentos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .equipamento-card {
+        display: block; 
+        padding: 15px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #003366;
+    }
   </style>
 </head>
 <body>
 
   <header class="topo">
     <h1>Data Book Digital</h1>
-    <p>Consulta de equipamentos por TAG</p>
   </header>
 
   <main class="container">
+    
     <section class="card-glow" role="button">
       <span class="glow"></span>
-      <div>
-        <h2 style="margin:0; color: white;">Equipamentos cadastrados</h2>
-        <input class="busca" id="busca" type="text" placeholder="Digite a TAG, modelo, tipo ou local...">
+      <div class="card-glow-content">
+        <h2 style="margin:0; color:white;">Equipamentos cadastrados</h2>
+        <input class="busca" id="busca" type="text" placeholder="Pesquisar...">
       </div>
     </section>
 
     <section class="grid-equipamentos" id="listaEquipamentos">
-       <a class="equipamento-card" href="#" data-busca="re-631011 motoredutor"><strong>RE-631011</strong> - MOTOREDUTOR</a>
-    </section>
+       <a class="equipamento-card" href="#" data-busca="re-631011 motoredutor">
+          <strong>RE-631011</strong><br><span>MOTOREDUTOR</span>
+       </a>
+       </section>
   </main>
 
   <script>
@@ -111,7 +97,8 @@
     campoBusca.addEventListener("input", function() {
       const termo = campoBusca.value.toLowerCase().trim();
       cards.forEach(card => {
-        const texto = card.getAttribute("data-busca");
+        // A lógica de busca continua buscando no atributo data-busca
+        const texto = card.getAttribute("data-busca") || "";
         card.style.display = texto.includes(termo) ? "block" : "none";
       });
     });
