@@ -1,71 +1,95 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
   <title>Data Book Digital - Equipamentos</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-
-   <style>
-
-    /* O seu CSS deve ficar aqui dentro */
-
+  <style>
     body { 
         font-family: Arial, sans-serif; 
-        margin: 20px; 
+        margin: 0; 
         color: #003366; 
         background-image: url('fundoinpasa1.jpg');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
         background-repeat: no-repeat;
-
     }
 
+    /* Fixação dos elementos no topo */
+    .topo { 
+        position: sticky; top: 0; background: white; z-index: 1000; 
+        padding: 20px; border-bottom: 2px solid #ccc;
+        display: flex; justify-content: space-between; align-items: center;
+    }
     
-
-    /* Importante para o seu script de busca funcionar sem quebrar o layout */
-
-    .equipamento-card {
-
-        display: block; /* Garante que funcione com o script */
-
-        /* Adicione aqui suas outras formatações de card */
-
-
-
-
+    .container .card { 
+        position: sticky; top: 110px; background: rgba(255, 255, 255, 0.95); 
+        z-index: 999; padding: 15px 20px; border-bottom: 1px solid #ddd;
     }
 
-  </style>
-/* Fixa o cabeçalho e a área de busca */
-.topo, .container .card {
-    position: -webkit-sticky; /* Para compatibilidade */
-    position: sticky;
-    top: 0;
-    background-color: white; /* Ou a cor de fundo do seu site */
-    z-index: 1000;
-    padding-bottom: 10px;
-}
+    /* Estilo do Card Cinza */
+    .card-cinza {
+        background-color: #d3d3d3 !important;
+        border: 1px solid #999 !important;
+    }
 
-/* Ajuste específico para o topo não sobrepor a busca */
-.topo { top: 0; }
-.container .card { top: 80px; /* Ajuste conforme a altura do seu header */ }
+    .grid-equipamentos { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; padding: 20px; }
+    .equipamento-card { display: block; padding: 15px; border: 1px solid #ccc; background: white; text-decoration: none; color: inherit; border-radius: 8px; }
+    
+    footer { text-align: center; padding: 20px; background: white; margin-top: 20px; }
+  </style>
 </head>
+<body>
 
   <header class="topo">
-
     <div>
-
       <h1>Data Book Digital</h1>
       <p>Consulta de equipamentos por TAG</p>
     </div>
     <div class="logo">GOLD<br>REDUTORES</div>
   </header>
 
+  <main class="container">
+    <section class="card">
+      <h2>Equipamentos cadastrados</h2>
+      <input class="busca" id="busca" type="text" placeholder="Exemplo: ME-631011, motoredutor, WEG...">
+    </section>
 
+    <section class="grid-equipamentos" id="listaEquipamentos">
+      <a class="equipamento-card" href="equipamentos/RE/index.html" data-busca="re- motoredutor v 07 redutor válvula rotativa 8 - csc 4">
+        <strong>RE-</strong> <span>MOTOREDUTOR</span> <span>V 07</span> <small>REDUTOR VÁLVULA ROTATIVA 8 - CSC 4</small>
+      </a>
+
+      <a class="equipamento-card" href="equipamentos/S-TAG/index.html" data-busca="s/tag motoredutor v58 cos7531/06">
+        <strong>S/TAG</strong> <span>MOTOREDUTOR</span> <span>V58</span> <small>COS7531/06</small>
+      </a>
+      </section>
+  </main>
+
+  <footer>Gold Redutores - Data Book Digital</footer>
+
+  <script>
+    // 1. Lógica da Busca
+    const campoBusca = document.getElementById("busca");
+    const cards = document.querySelectorAll(".equipamento-card");
+
+    campoBusca.addEventListener("input", function() {
+      const termo = campoBusca.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const texto = card.getAttribute("data-busca");
+        card.style.display = texto.includes(termo) ? "block" : "none";
+      });
+    });
+
+    // 2. Lógica para pintar de cinza automaticamente os cards "S/TAG"
+    cards.forEach(card => {
+        if (card.innerText.includes("S/TAG")) {
+            card.classList.add("card-cinza");
+        }
+    });
+  </script>
+
+</body>
 
   <main class="container">
 
