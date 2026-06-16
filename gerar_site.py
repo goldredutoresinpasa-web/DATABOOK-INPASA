@@ -27,9 +27,10 @@ import html
 # Exemplo: "https://gold-redutores.github.io/DATABOOK-INPASA"
 BASE_URL = " https://goldredutoresinpasa-web.github.io/DATABOOK-INPASA/"
 
-ARQUIVO_EXCEL = "dados_equipamentos.xlsx"
-PASTA_EQUIPAMENTOS = Path("equipamentos")
-PASTA_QRCODES = Path("assets/qrcodes")
+BASE_DIR = Path(__file__).resolve().parent
+ARQUIVO_EXCEL = BASE_DIR / "dados_equipamentos.xlsx"
+PASTA_EQUIPAMENTOS = BASE_DIR / "equipamentos"
+PASTA_QRCODES = BASE_DIR / "assets" / "qrcodes"
 
 
 def limpar_texto(valor):
@@ -105,6 +106,9 @@ def gerar_html_equipamento(dados):
 
     link_publicado = BASE_URL.rstrip("/") + "/equipamentos/" + tag_pasta + "/"
 
+    logo_gold = "../../assets/img/transparent/logo_gold_transparent.png"
+    logo_inpasa = "../../assets/img/logo_inpasa.png"
+
     return f"""<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -116,16 +120,24 @@ def gerar_html_equipamento(dados):
 <body>
 
   <header class="topo">
-    <div>
-      <h1>Mini Data Book - {html.escape(tag)}</h1>
-      <p>{html.escape(limpar_texto(dados.get("Tipo", "Equipamento")))} | Consulta rápida via QR Code</p>
+    <div class="header-row">
+      <div class="logos">
+         <!-- Ajuste o tamanho do logo INPASA aqui via .logo-inpasa no CSS. -->
+        <img class="logo-inpasa" src="{html.escape(logo_inpasa)}" alt="INPASA">
+       
+      </div>
+      <div class="header-text">
+        <div class="tipo">{html.escape(limpar_texto(dados.get("Tipo", "Equipamento")))}</div>
+        <div class="tag">{html.escape(tag)}</div>
+      </div>
+      <div class="logos">
+      <img class="logo-gold" src="{html.escape(logo_gold)}" alt="Gold Redutores">
+      </div>
     </div>
-    <div class="logo">GOLD<br>REDUTORES</div>
   </header>
 
   <main class="container">
-    <section class="card">
-      <h2>Foto do equipamento</h2>
+    <section class="photo-card">
       {bloco_foto}
     </section>
 
@@ -185,6 +197,9 @@ def gerar_index_principal(df):
       </a>
 """
 
+    logo_gold = "assets/img/transparent/logo_gold_transparent.png"
+    logo_inpasa = "assets/img/logo_inpasa.png"
+
     return f"""<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -196,11 +211,19 @@ def gerar_index_principal(df):
 <body>
 
   <header class="topo">
-    <div>
-      <h1>Data Book Digital</h1>
-      <p>Consulta de equipamentos por TAG</p>
+    <div class="header-row">
+      <div class="logos">
+      <!-- Ajuste o tamanho do logo INPASA aqui via .logo-inpasa no CSS. -->
+        <img class="logo-inpasa" src="{html.escape(logo_inpasa)}" alt="INPASA">
+      </div>
+        <div class="header-text">
+        <div class="tipo">Data Book Digital</div>
+        <div class="tag">Equipamentos</div>
+      </div>
+      <div class="logos">
+      <img class="logo-gold" src="{html.escape(logo_gold)}" alt="Gold Redutores">
+      </div>
     </div>
-    <div class="logo">GOLD<br>REDUTORES</div>
   </header>
 
   <main class="container">
@@ -236,10 +259,15 @@ def gerar_index_principal(df):
 
 
 def main():
-    if not Path(ARQUIVO_EXCEL).exists():
-        raise FileNotFoundError(f"Arquivo não encontrado: {ARQUIVO_EXCEL}")
+    arquivo_excel = ARQUIVO_EXCEL
+    if not arquivo_excel.exists():
+        fallback = BASE_DIR / "dados_equipamentos-geral.xlsx"
+        if fallback.exists():
+            arquivo_excel = fallback
+        else:
+            raise FileNotFoundError(f"Arquivo não encontrado: {arquivo_excel}")
 
-    df = pd.read_excel(ARQUIVO_EXCEL)
+    df = pd.read_excel(arquivo_excel)
 
     if "TAG" not in df.columns:
         raise ValueError("A planilha precisa ter uma coluna chamada TAG.")
@@ -276,7 +304,7 @@ def main():
 
         total += 1
 
-    Path("index.html").write_text(gerar_index_principal(df), encoding="utf-8")
+    (BASE_DIR / "index.html").write_text(gerar_index_principal(df), encoding="utf-8")
 
     print(f"Concluído: {total} páginas criadas.")
     print("QR Codes salvos em assets/qrcodes/")
