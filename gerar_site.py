@@ -207,24 +207,87 @@ def gerar_index_principal(df):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data Book Digital - Equipamentos</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Estilos Integrados do Pure CSS3 Slider - Copiado do Relatório */
+    .header-slider-wrapper {{ position: sticky; top: 0; z-index: 1000; }}
+    #slider {{ width: 90%; max-width: 1080px; height: 70px; position: relative; overflow: hidden; margin: 8px auto 15px auto; border: 1px solid #333; background: #fff; }}
+    .slides {{ width: 200%; height: 100%; position: relative; -webkit-animation: slide 12s infinite; -moz-animation: slide 12s infinite; animation: slide 12s infinite; }}
+    .slider {{ width: 16.6666%; height: 100%; float: left; position: relative; z-index: 1; overflow: hidden; box-sizing: border-box; border-right: 2px solid #333; }}
+    .image {{ width: 100%; height: 100%; position: relative; }}
+    .image img {{ width: 100%; height: 100%; object-fit: contain; display: block; }}
+    .switch {{ width: 120px; height: 10px; position: absolute; bottom: 18px; z-index: 99; left: 20px; }}
+    .switch>ul {{ list-style: none; overflow: hidden; padding: 0; margin: 0; }}
+    .switch>ul>li {{ width: 6px; height: 6px; border-radius: 50%; background: #333; float: left; margin-right: 9px; cursor: pointer; }}
+    .on {{ width: 100%; height: 100%; border-radius: 50%; background: rgba(23, 117, 177, 1); position: relative; -webkit-animation: on 12s infinite; -moz-animation: on 12s infinite; animation: on 12s infinite; }}
+    @-webkit-keyframes slide {{ 0%, 20% {{ margin-left: 0%; }} 25%, 45% {{ margin-left: -33.333%; }} 50%, 70% {{ margin-left: -66.666%; }} 75%, 95% {{ margin-left: -100%; }} 100% {{ margin-left: 0%; }} }}
+    @keyframes slide {{ 0%, 20% {{ margin-left: 0%; }} 25%, 45% {{ margin-left: -33.333%; }} 50%, 70% {{ margin-left: -66.666%; }} 75%, 95% {{ margin-left: -100%; }} 100% {{ margin-left: 0%; }} }}
+    @-webkit-keyframes on {{ 0%, 20% {{ margin-left: 0%; }} 25%, 45% {{ margin-left: 15px; }} 50%, 70% {{ margin-left: 30px; }} 75%, 95% {{ margin-left: 45px; }} 100% {{ margin-left: 0%; }} }}
+    @keyframes on {{ 0%, 20% {{ margin-left: 0%; }} 25%, 45% {{ margin-left: 15px; }} 50%, 70% {{ margin-left: 30px; }} 75%, 95% {{ margin-left: 45px; }} 100% {{ margin-left: 0%; }} }}
+  </style>
 </head>
 <body>
 
-  <header class="topo">
-    <div class="header-row">
-      <div class="logos">
-      <!-- Ajuste o tamanho do logo INPASA aqui via .logo-inpasa no CSS. -->
-        <img class="logo-inpasa" src="{html.escape(logo_inpasa)}" alt="INPASA">
+  <div class="header-slider-wrapper">
+    <header class="topo">
+      <div class="header-row">
+        <div class="logos">
+        <!-- Ajuste o tamanho do logo INPASA aqui via .logo-inpasa no CSS. -->
+          <img class="logo-inpasa" src="{html.escape(logo_inpasa)}" alt="INPASA">
+        </div>
+          <div class="header-text">
+          <div class="tipo">Data Book Digital</div>
+          <div class="tag">Equipamentos</div>
+        </div>
+        <div class="logos">
+        <img class="logo-gold" src="{html.escape(logo_gold)}" alt="Gold Redutores">
+        </div>
       </div>
-        <div class="header-text">
-        <div class="tipo">Data Book Digital</div>
-        <div class="tag">Equipamentos</div>
-      </div>
-      <div class="logos">
-      <img class="logo-gold" src="{html.escape(logo_gold)}" alt="Gold Redutores">
-      </div>
+    </header>
+
+    <!-- Carrossel de Imagens -->
+    <div id="slider">
+        <div class="slides">
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/V07bLNT1/GOLD-MAQUINAS.png" alt="Logo Gold Redutores">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/JjQNQPwJ/logo-inpasa.png" alt="Logo Inpasa" style="object-fit: contain; padding: 20px; box-sizing: border-box;">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/r9DRsZq/GOLD-REDUTORES.png" alt="GOLD REDUTORES" border="0">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/JjQNQPwJ/logo-inpasa.png" alt="Logo Inpasa" style="object-fit: contain; padding: 20px; box-sizing: border-box;">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/3mVp95wL/GOLD-AUTOMA-O.png" alt="GOLD AUTOMAÇÃO" border="0">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/JjQNQPwJ/logo-inpasa.png" alt="Logo Inpasa" style="object-fit: contain; padding: 20px; box-sizing: border-box;">
+                </div>
+            </div>
+        </div>
+        <div class="switch">
+            <ul>
+                <li><div class="on"></div></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
     </div>
-  </header>
+  </div>
 
   <main class="container">
     <section class="card">

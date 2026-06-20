@@ -5,24 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data Book Digital - Equipamentos</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Estilos Integrados do Pure CSS3 Slider - Copiado do Relatório */
+    .header-slider-wrapper { position: sticky; top: 0; z-index: 1000; }
+    #slider { width: 90%; max-width: 1080px; height: 70px; position: relative; overflow: hidden; margin: 8px auto 15px auto; border: 1px solid #333; background: #fff; }
+    .slides { width: 200%; height: 100%; position: relative; -webkit-animation: slide 12s infinite; -moz-animation: slide 12s infinite; animation: slide 12s infinite; }
+    .slider { width: 16.6666%; height: 100%; float: left; position: relative; z-index: 1; overflow: hidden; box-sizing: border-box; border-right: 2px solid #333; }
+    .image { width: 100%; height: 100%; position: relative; }
+    .image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .switch { width: 120px; height: 10px; position: absolute; bottom: 18px; z-index: 99; left: 20px; }
+    .switch>ul { list-style: none; overflow: hidden; padding: 0; margin: 0; }
+    .switch>ul>li { width: 6px; height: 6px; border-radius: 50%; background: #333; float: left; margin-right: 9px; cursor: pointer; }
+    .on { width: 100%; height: 100%; border-radius: 50%; background: rgba(23, 117, 177, 1); position: relative; -webkit-animation: on 12s infinite; -moz-animation: on 12s infinite; animation: on 12s infinite; }
+    @-webkit-keyframes slide { 0%, 20% { margin-left: 0%; } 25%, 45% { margin-left: -33.333%; } 50%, 70% { margin-left: -66.666%; } 75%, 95% { margin-left: -100%; } 100% { margin-left: 0%; } }
+    @keyframes slide { 0%, 20% { margin-left: 0%; } 25%, 45% { margin-left: -33.333%; } 50%, 70% { margin-left: -66.666%; } 75%, 95% { margin-left: -100%; } 100% { margin-left: 0%; } }
+    @-webkit-keyframes on { 0%, 20% { margin-left: 0%; } 25%, 45% { margin-left: 15px; } 50%, 70% { margin-left: 30px; } 75%, 95% { margin-left: 45px; } 100% { margin-left: 0%; } }
+    @keyframes on { 0%, 20% { margin-left: 0%; } 25%, 45% { margin-left: 15px; } 50%, 70% { margin-left: 30px; } 75%, 95% { margin-left: 45px; } 100% { margin-left: 0%; } }
+  </style>
 </head>
 <body>
 
-  <header class="topo">
-    <div class="header-row">
-      <div class="logos">
-      <!-- Ajuste o tamanho do logo INPASA aqui via .logo-inpasa no CSS. -->
-        <img class="logo-inpasa" src="assets/img/logo_inpasa.png" alt="INPASA">
+  <div class="header-slider-wrapper">
+    <header class="topo">
+      <div class="header-row">
+        <div class="logos">
+        <!-- Ajuste o tamanho do logo INPASA aqui via .logo-inpasa no CSS. -->
+          <img class="logo-inpasa" src="assets/img/logo_inpasa.png" alt="INPASA">
+        </div>
+          <div class="header-text">
+          <div class="tipo">Data Book Digital</div>
+          <div class="tag">Equipamentos</div>
+        </div>
+        <div class="logos">
+        <img class="logo-gold" src="assets/img/transparent/logo_gold_transparent.png" alt="Gold Redutores">
+        </div>
       </div>
-        <div class="header-text">
-        <div class="tipo">Data Book Digital</div>
-        <div class="tag">Equipamentos</div>
-      </div>
-      <div class="logos">
-      <img class="logo-gold" src="assets/img/transparent/logo_gold_transparent.png" alt="Gold Redutores">
-      </div>
+    </header>
+
+    <!-- Carrossel de Imagens -->
+    <div id="slider">
+        <div class="slides">
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/V07bLNT1/GOLD-MAQUINAS.png" alt="Logo Gold Redutores">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/JjQNQPwJ/logo-inpasa.png" alt="Logo Inpasa" style="object-fit: contain; padding: 20px; box-sizing: border-box;">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/r9DRsZq/GOLD-REDUTORES.png" alt="GOLD REDUTORES" border="0">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/JjQNQPwJ/logo-inpasa.png" alt="Logo Inpasa" style="object-fit: contain; padding: 20px; box-sizing: border-box;">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/3mVp95wL/GOLD-AUTOMA-O.png" alt="GOLD AUTOMAÇÃO" border="0">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="image">
+                    <img src="https://i.ibb.co/JjQNQPwJ/logo-inpasa.png" alt="Logo Inpasa" style="object-fit: contain; padding: 20px; box-sizing: border-box;">
+                </div>
+            </div>
+        </div>
+        <div class="switch">
+            <ul>
+                <li><div class="on"></div></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
     </div>
-  </header>
+  </div>
 
   <main class="container">
     <section class="card">
@@ -33,135 +96,135 @@
 
     <section class="grid-equipamentos" id="listaEquipamentos">
       
-      <a class="equipamento-card" href="equipamentos/RE-631501/index.html" data-busca="re-631501 motoredutor wcg20 - v/f10 correia transportadora - ct- 01">
+      <a class="equipamento-card" href="equipamentos/RE-631501/index.html" data-busca="re-631501 motoredutor weg cestari wcg20 - v/f10 correia transportadora - ct- 01">
         <strong>RE-631501</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 - V/F10</span>
         <small>Correia Transportadora - CT- 01</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-631502/index.html" data-busca="re-631502 motoredutor wcg20 - v/f10 correia transportadora - ct- 02">
+      <a class="equipamento-card" href="equipamentos/RE-631502/index.html" data-busca="re-631502 motoredutor weg cestari wcg20 - v/f10 correia transportadora - ct- 02">
         <strong>RE-631502</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 - V/F10</span>
         <small>Correia Transportadora - CT- 02</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-631503/index.html" data-busca="re-631503 motoredutor wcg20 - v/f10 correia transportadora - ct- 03">
+      <a class="equipamento-card" href="equipamentos/RE-631503/index.html" data-busca="re-631503 motoredutor weg cestari wcg20 - v/f10 correia transportadora - ct- 03">
         <strong>RE-631503</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 - V/F10</span>
         <small>Correia Transportadora - CT- 03</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-631504/index.html" data-busca="re-631504 motoredutor wcg20 - v/f10 correia transportadora - ct- 04">
+      <a class="equipamento-card" href="equipamentos/RE-631504/index.html" data-busca="re-631504 motoredutor weg cestari wcg20 - v/f10 correia transportadora - ct- 04">
         <strong>RE-631504</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 - V/F10</span>
         <small>Correia Transportadora - CT- 04</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-631508/index.html" data-busca="re-631508 motoredutor wcg20 - v/f12 correia transportadora - ct-08">
+      <a class="equipamento-card" href="equipamentos/RE-631508/index.html" data-busca="re-631508 motoredutor weg cestari wcg20 - v/f12 correia transportadora - ct-08">
         <strong>RE-631508</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 - V/F12</span>
         <small>Correia Transportadora - CT-08</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-631509/index.html" data-busca="re-631509 motoredutor wcg20 - v/f12 correia transportadora - ct-09">
+      <a class="equipamento-card" href="equipamentos/RE-631509/index.html" data-busca="re-631509 motoredutor weg cestari wcg20 - v/f12 correia transportadora - ct-09">
         <strong>RE-631509</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 - V/F12</span>
         <small>Correia Transportadora - CT-09</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-631512/index.html" data-busca="re-631512 motoredutor wcg20 f10 3 correia transportadora - ct- 25">
+      <a class="equipamento-card" href="equipamentos/RE-631512/index.html" data-busca="re-631512 motoredutor weg cestari wcg20 f10 3 correia transportadora - ct- 25">
         <strong>RE-631512</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 F10 3</span>
         <small>Correia Transportadora - CT- 25</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-631513/index.html" data-busca="re-631513 motoredutor wcg20 v/f12 3 correia transportadora - ct- 23">
+      <a class="equipamento-card" href="equipamentos/RE-631513/index.html" data-busca="re-631513 motoredutor weg cestari wcg20 v/f12 3 correia transportadora - ct- 23">
         <strong>RE-631513</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 V/F12 3</span>
         <small>Correia Transportadora - CT- 23</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-631514/index.html" data-busca="re-631514 motoredutor wcg20 - v/f12 correia transportadora - ct-21">
+      <a class="equipamento-card" href="equipamentos/RE-631514/index.html" data-busca="re-631514 motoredutor weg cestari wcg20 - v/f12 correia transportadora - ct-21">
         <strong>RE-631514</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 - V/F12</span>
         <small>Correia Transportadora - CT-21</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-631516/index.html" data-busca="re-631516 motoredutor wcg20 - v/f10 correia transportadora - ct- 22">
+      <a class="equipamento-card" href="equipamentos/RE-631516/index.html" data-busca="re-631516 motoredutor weg cestari wcg20 - v/f10 correia transportadora - ct- 22">
         <strong>RE-631516</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>WCG20 - V/F10</span>
         <small>Correia Transportadora - CT- 22</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-601011/index.html" data-busca="re-601011 motoredutor c10 - 3 dosador de cavaco 1">
+      <a class="equipamento-card" href="equipamentos/RE-601011/index.html" data-busca="re-601011 motoredutor weg cestari c10 - 3 dosador de cavaco 1">
         <strong>RE-601011</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>C10 - 3</span>
         <small>DOSADOR DE CAVACO 1</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-601012/index.html" data-busca="re-601012 motoredutor c10 - 3 dosador de cavaco 2">
+      <a class="equipamento-card" href="equipamentos/RE-601012/index.html" data-busca="re-601012 motoredutor weg cestari c10 - 3 dosador de cavaco 2">
         <strong>RE-601012</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>C10 - 3</span>
         <small>DOSADOR DE CAVACO 2</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-601013/index.html" data-busca="re-601013 motoredutor c10 - 3 dosador de cavaco 3">
+      <a class="equipamento-card" href="equipamentos/RE-601013/index.html" data-busca="re-601013 motoredutor weg cestari c10 - 3 dosador de cavaco 3">
         <strong>RE-601013</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>C10 - 3</span>
         <small>DOSADOR DE CAVACO 3</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-601014/index.html" data-busca="re-601014 motoredutor c10 - 3 dosador de cavaco 4">
+      <a class="equipamento-card" href="equipamentos/RE-601014/index.html" data-busca="re-601014 motoredutor weg cestari c10 - 3 dosador de cavaco 4">
         <strong>RE-601014</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>C10 - 3</span>
         <small>DOSADOR DE CAVACO 4</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-601015/index.html" data-busca="re-601015 motoredutor c10 - 3 dosador de cavaco 5">
+      <a class="equipamento-card" href="equipamentos/RE-601015/index.html" data-busca="re-601015 motoredutor weg cestari c10 - 3 dosador de cavaco 5">
         <strong>RE-601015</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>C10 - 3</span>
         <small>DOSADOR DE CAVACO 5</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-601016/index.html" data-busca="re-601016 motoredutor c10 - 3 dosador de cavaco 6">
+      <a class="equipamento-card" href="equipamentos/RE-601016/index.html" data-busca="re-601016 motoredutor weg cestari c10 - 3 dosador de cavaco 6">
         <strong>RE-601016</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>C10 - 3</span>
         <small>DOSADOR DE CAVACO 6</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-601017/index.html" data-busca="re-601017 motoredutor c10 - 3 dosador de cavaco 7">
+      <a class="equipamento-card" href="equipamentos/RE-601017/index.html" data-busca="re-601017 motoredutor weg cestari c10 - 3 dosador de cavaco 7">
         <strong>RE-601017</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>C10 - 3</span>
         <small>DOSADOR DE CAVACO 7</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-601018/index.html" data-busca="re-601018 motoredutor c10 - 3 dosador de cavaco 8">
+      <a class="equipamento-card" href="equipamentos/RE-601018/index.html" data-busca="re-601018 motoredutor weg cestari c10 - 3 dosador de cavaco 8">
         <strong>RE-601018</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>C10 - 3</span>
         <small>DOSADOR DE CAVACO 8</small>
       </a>
 
-      <a class="equipamento-card" href="equipamentos/RE-601019/index.html" data-busca="re-601019 motoredutor c10 - 3 dosador de cavaco 9">
+      <a class="equipamento-card" href="equipamentos/RE-601019/index.html" data-busca="re-601019 motoredutor weg cestari c10 - 3 dosador de cavaco 9">
         <strong>RE-601019</strong>
-        <span>MOTOREDUTOR</span>
+        <span>MOTOREDUTOR WEG CESTARI</span>
         <span>C10 - 3</span>
         <small>DOSADOR DE CAVACO 9</small>
       </a>
