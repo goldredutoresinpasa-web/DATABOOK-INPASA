@@ -39,6 +39,14 @@ def limpar_texto(valor):
     return str(valor).strip()
 
 
+def primeiro_valor_nao_vazio(*valores):
+    for valor in valores:
+        texto = limpar_texto(valor)
+        if texto:
+            return texto
+    return ""
+
+
 def tag_para_pasta(tag):
     tag = limpar_texto(tag).upper()
     tag = tag.replace(" ", "-")
@@ -101,7 +109,15 @@ def gerar_html_equipamento(dados):
 
     botao_lista = criar_botao("Lista de Peças", dados.get("Lista_Pecas", ""))
     botao_manual = criar_botao("Manual", dados.get("Manual", ""))
-    # botao_certificado = criar_botao("Certificado", dados.get("Certificado", ""))
+
+    caminho_relatorio = primeiro_valor_nao_vazio(
+        dados.get("RELATÓRIO FINAL", ""),
+        dados.get("RELATORIO FINAL", ""),
+        dados.get("Relatorio Final", ""),
+        dados.get("Certificado", ""),
+        dados.get("CERTIFICADA", ""),
+    )
+    botao_relatorio = criar_botao("RELATORIO FINAL", caminho_relatorio)
     botao_fotos = criar_botao("Fotos adicionais", dados.get("Fotos_Adicionais", ""))
 
     link_publicado = BASE_URL.rstrip("/") + "/equipamentos/" + tag_pasta + "/"
@@ -151,9 +167,9 @@ def gerar_html_equipamento(dados):
     <section class="card">
       <h2>Acessos rápidos</h2>
       <div class="botoes">
+        {botao_relatorio}
         {botao_lista}
         {botao_manual}
-        
         {botao_fotos}
         <a href="../../index.html" class="botao secundario">Voltar para lista geral</a>
       </div>
