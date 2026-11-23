@@ -12,9 +12,13 @@ pip install pandas openpyxl qrcode pillow
 
 USO:
 1. Preencha equipcaldeira1-INPASA.xlsx
-2. Altere BASE_URL abaixo
+2. Confira se BASE_URL aponta para o GitHub Pages correto
 3. Rode: python gerar_site_CALDEIRA1.py
-4. Envie os arquivos gerados para a branch main de DATABOOK-INPASA.
+4. Envie index.html e todas as subpastas geradas em equipamentos/ para a
+   branch main de DATABOOK-INPASA. Enviar somente index.html causa links 404.
+5. Envie também para assets/pdf/ os PDFs indicados na coluna Fotos_Adicionais.
+   Os botões de fotos abrem esses PDFs; as imagens não são exibidas na página.
+   Preserve os demais arquivos e pastas já existentes no repositório.
    A execução local deste script não publica no GitHub.
 """
 
@@ -126,7 +130,14 @@ def preparar_equipamentos(df):
             if not texto:
                 continue
 
-            if normalizar_nome_coluna(coluna) == "observacoes":
+            coluna_normalizada = normalizar_nome_coluna(coluna)
+            if coluna_normalizada == "fotosadicionais":
+                caminhos_existentes = separar_caminhos(registro_existente.get(coluna, ""))
+                for caminho in separar_caminhos(texto):
+                    if caminho not in caminhos_existentes:
+                        caminhos_existentes.append(caminho)
+                registro_existente[coluna] = "\n".join(caminhos_existentes)
+            elif coluna_normalizada == "observacoes":
                 observacoes = limpar_texto(registro_existente.get(coluna, ""))
                 linhas_existentes = set(observacoes.splitlines())
                 novas_linhas = [linha for linha in texto.splitlines() if linha not in linhas_existentes]
@@ -157,6 +168,16 @@ def link_relativo(caminho):
     return "../../" + caminho.lstrip("/")
 
 
+def separar_caminhos(caminhos):
+    partes = re.split(r"[;\r\n]+", limpar_texto(caminhos))
+    resultado = []
+    for parte in partes:
+        caminho = parte.strip()
+        if caminho and caminho not in resultado:
+            resultado.append(caminho)
+    return resultado
+
+
 def recurso_disponivel(caminho):
     caminho = limpar_texto(caminho)
     if not caminho:
@@ -180,6 +201,20 @@ def criar_botao(titulo, caminho, classe="botao"):
     if not recurso_disponivel(caminho):
         return f'<span class="botao inativo">{html.escape(titulo)} indisponível (arquivo não encontrado: {html.escape(caminho)})</span>'
     return f'<a class="{classe}" href="{html.escape(link_relativo(caminho))}" target="_blank">{html.escape(titulo)}</a>'
+
+
+def criar_botoes_fotos(caminhos):
+    caminhos = separar_caminhos(caminhos)
+    if not caminhos:
+        return criar_botao("Fotos adicionais (PDF)", "")
+
+    botoes = []
+    for indice, caminho in enumerate(caminhos, start=1):
+        titulo = "Fotos adicionais (PDF)"
+        if len(caminhos) > 1:
+            titulo = f"Fotos adicionais (PDF {indice})"
+        botoes.append(criar_botao(titulo, caminho))
+    return "\n".join(botoes)
 
 
 def gerar_html_equipamento(dados):
@@ -232,7 +267,7 @@ def gerar_html_equipamento(dados):
         "Certificada",
     )
     botao_relatorio = criar_botao("RELATORIO FINAL", caminho_relatorio)
-    botao_fotos = criar_botao("Fotos adicionais", obter_valor_coluna(dados, "Fotos_Adicionais", "FOTOS ADICIONAIS"))
+    botao_fotos = criar_botoes_fotos(obter_valor_coluna(dados, "Fotos_Adicionais", "FOTOS ADICIONAIS"))
 
     link_publicado = BASE_URL.rstrip("/") + "/equipamentos/" + tag_pasta + "/"
 
@@ -514,7 +549,9 @@ def main():
     print("QR Codes salvos em assets/qrcodes/")
     print("Página inicial criada: index.html")
     print("Atenção: esta execução local não publica no GitHub.")
-    print("Envie os arquivos gerados para a branch main de DATABOOK-INPASA.")
+    print("Envie index.html e todas as subpastas geradas em equipamentos/ para a branch main de DATABOOK-INPASA.")
+    print("Envie também os PDFs de Fotos_Adicionais para assets/pdf/; os botões abrem os PDFs, não uma galeria inline.")
+    print("Enviar somente index.html causa links 404; preserve os demais arquivos e pastas já existentes no repositório.")
 
 
 if __name__ == "__main__":
