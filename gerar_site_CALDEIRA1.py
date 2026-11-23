@@ -13,8 +13,11 @@ pip install pandas openpyxl qrcode pillow
 USO:
 1. Preencha equipcaldeira1-INPASA.xlsx
 2. Altere BASE_URL abaixo
-3. Rode: python gerar_site.py
-4. Envie o conteúdo da pasta para o GitHub
+3. Rode: python gerar_site_CALDEIRA1.py
+4. Envie as alterações para a branch main do GitHub.
+   O workflow .github/workflows/deploy-pages.yml gera e publica o site.
+   Configure uma vez: Settings > Pages > Source > GitHub Actions.
+   A execução local deste script não publica no GitHub.
 """
 
 from pathlib import Path
@@ -489,9 +492,11 @@ def main():
         if qr.stem[3:] not in tags_esperadas:
             qr.unlink()
 
-    print(f"Concluído: {total} páginas criadas.")
+    print(f"Geração local concluída: {total} páginas criadas.")
     print("QR Codes salvos em assets/qrcodes/")
     print("Página inicial criada: index.html")
+    print("Atenção: esta execução local não publica no GitHub.")
+    print("No GitHub, o workflow deploy-pages.yml publica após push na branch main.")
 
 
 if __name__ == "__main__":
