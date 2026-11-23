@@ -14,9 +14,7 @@ USO:
 1. Preencha equipcaldeira1-INPASA.xlsx
 2. Altere BASE_URL abaixo
 3. Rode: python gerar_site_CALDEIRA1.py
-4. Envie as alterações para a branch main do GitHub.
-   O workflow .github/workflows/deploy-pages.yml gera e publica o site.
-   Configure uma vez: Settings > Pages > Source > GitHub Actions.
+4. Envie os arquivos gerados para a branch main de DATABOOK-INPASA.
    A execução local deste script não publica no GitHub.
 """
 
@@ -36,8 +34,8 @@ ValueError = _builtins.ValueError
 print = _builtins.print
 
 # ALTERAR AQUI depois que o GitHub Pages estiver criado.
-# Exemplo: "https://goldredutoresinpasa-web.github.io/DATABOOK-CALDEIRA-1"
-BASE_URL = "https://goldredutoresinpasa-web.github.io/DATABOOK-CALDEIRA-1"
+# URL publicada pelo repositório DATABOOK-INPASA.
+BASE_URL = "https://goldredutoresinpasa-web.github.io/DATABOOK-INPASA"
 
 BASE_DIR = Path(__file__).resolve().parent
 ARQUIVO_EXCEL = BASE_DIR / "equipcaldeira1-INPASA.xlsx"
@@ -516,7 +514,7 @@ def main():
     print("QR Codes salvos em assets/qrcodes/")
     print("Página inicial criada: index.html")
     print("Atenção: esta execução local não publica no GitHub.")
-    print("No GitHub, o workflow deploy-pages.yml publica após push na branch main.")
+    print("Envie os arquivos gerados para a branch main de DATABOOK-INPASA.")
 
 
 if __name__ == "__main__":
