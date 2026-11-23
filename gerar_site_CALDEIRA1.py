@@ -159,10 +159,28 @@ def link_relativo(caminho):
     return "../../" + caminho.lstrip("/")
 
 
+def recurso_disponivel(caminho):
+    caminho = limpar_texto(caminho)
+    if not caminho:
+        return False
+    if caminho.startswith(("http://", "https://")):
+        return True
+
+    arquivo = Path(caminho)
+    if arquivo.is_absolute():
+        return arquivo.is_file()
+
+    link = link_relativo(caminho)
+    arquivo = PASTA_EQUIPAMENTOS / "_verificacao" / link
+    return arquivo.resolve().is_file()
+
+
 def criar_botao(titulo, caminho, classe="botao"):
     caminho = limpar_texto(caminho)
     if caminho == "":
         return f'<span class="botao inativo">{html.escape(titulo)} indisponível</span>'
+    if not recurso_disponivel(caminho):
+        return f'<span class="botao inativo">{html.escape(titulo)} indisponível (arquivo não encontrado: {html.escape(caminho)})</span>'
     return f'<a class="{classe}" href="{html.escape(link_relativo(caminho))}" target="_blank">{html.escape(titulo)}</a>'
 
 
@@ -171,8 +189,10 @@ def gerar_html_equipamento(dados):
     tag_pasta = tag_para_pasta(tag)
 
     foto = link_relativo(obter_valor_coluna(dados, "Foto", "FOTO"))
-    if foto:
+    if foto and recurso_disponivel(foto):
         bloco_foto = f'<img src="{html.escape(foto)}" alt="Foto do equipamento {html.escape(tag)}" class="foto-equipamento">'
+    elif foto:
+        bloco_foto = f'<div class="obs">Foto não encontrada: {html.escape(foto)}</div>'
     else:
         bloco_foto = '<div class="obs">Foto não cadastrada na planilha.</div>'
 
